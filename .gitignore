@@ -1,0 +1,24 @@
+# Compiled class files
+*.class
+
+# Java build artifacts
+target/
+build/
+out/
+bin/
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+.classpath
+.project
+.settings/
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
