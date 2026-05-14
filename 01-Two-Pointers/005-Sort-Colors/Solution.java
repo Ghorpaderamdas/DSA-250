@@ -120,32 +120,53 @@ public class Solution {
     // 2s fill the remaining space automatically.
     // ============================================================
     public void sortColorsTwoPass(int[] nums) {
-        int write = 0;
 
-        // pass 1: place all 0s
-        for (int i = 0; i < nums.length; i++) {
-            if (nums[i] == 0) {
-                swap(nums, write, i);
-                write++;
-            }
-        }
+    // left tells where next correct number should go
+    int left = 0;
 
-        // pass 2: place all 1s (starting right after the 0s)
-        for (int i = write; i < nums.length; i++) {
-            if (nums[i] == 1) {
-                swap(nums, write, i);
-                write++;
-            }
+    // =================================================
+    // PASS 1 → Move all 0s to the front
+    // =================================================
+    for (int right = 0; right < nums.length; right++) {
+
+        // If current number is 0
+        if (nums[right] == 0) {
+
+            // Put 0 at correct position
+            swap(nums, left, right);
+
+            // Move left forward
+            left++;
         }
-        // 2s are already in the remaining positions
     }
 
-    private void swap(int[] nums, int i, int j) {
-        int tmp = nums[i];
-        nums[i] = nums[j];
-        nums[j] = tmp;
+    // =================================================
+    // PASS 2 → Move all 1s after the 0s
+    // =================================================
+    for (int right = left; right < nums.length; right++) {
+
+        // If current number is 1
+        if (nums[right] == 1) {
+
+            // Put 1 at correct position
+            swap(nums, left, right);
+
+            // Move left forward
+            left++;
+        }
     }
 
+    // Remaining positions automatically contain 2s
+}
+
+
+// Swap helper function
+private void swap(int[] nums, int i, int j) {
+
+    int temp = nums[i];
+    nums[i] = nums[j];
+    nums[j] = temp;
+}
     // ============================================================
     // Driver
     // ============================================================
