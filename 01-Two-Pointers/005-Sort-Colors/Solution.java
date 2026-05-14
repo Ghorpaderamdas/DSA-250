@@ -26,6 +26,7 @@ public class Solution {
     // ============================================================
     public void sortColorsBrute(int[] nums) {
         int n = nums.length;
+        //
         for (int i = 0; i < n - 1; i++) {
             for (int j = 0; j < n - i - 1; j++) {
                 if (nums[j] > nums[j + 1]) {
@@ -37,6 +38,7 @@ public class Solution {
         }
     }
 
+    
     // ============================================================
     // Method 2 — Counting Sort (Better)
     // Time:  O(n)   two passes
@@ -45,20 +47,38 @@ public class Solution {
     // Count occurrences of 0, 1, 2 in first pass.
     // Overwrite the array in second pass.
     // ============================================================
-    public void sortColorsCounting(int[] nums) {
-        int count0 = 0, count1 = 0, count2 = 0;
+   public void sortColorsCounting(int[] nums) {
 
-        for (int num : nums) {
-            if      (num == 0) count0++;
-            else if (num == 1) count1++;
-            else               count2++;
+    int count0 = 0, count1 = 0, count2 = 0;
+
+    // Count frequencies
+    for (int i = 0; i < nums.length; i++) {
+
+        if (nums[i] == 0) {
+            count0++;
+        } else if (nums[i] == 1) {
+            count1++;
+        } else {
+            count2++;
         }
-
-        int idx = 0;
-        while (count0-- > 0) nums[idx++] = 0;
-        while (count1-- > 0) nums[idx++] = 1;
-        while (count2-- > 0) nums[idx++] = 2;
     }
+
+    // Rewrite array
+    int idx = 0;
+
+    while (count0-- > 0) {
+        nums[idx++] = 0;
+    }
+
+    while (count1-- > 0) {
+        nums[idx++] = 1;
+    }
+
+    while (count2-- > 0) {
+        nums[idx++] = 2;
+    }
+}
+
 
     // ============================================================
     // Method 3 — Dutch National Flag (Optimal) ⭐
