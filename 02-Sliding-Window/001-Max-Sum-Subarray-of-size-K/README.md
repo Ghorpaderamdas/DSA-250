@@ -278,25 +278,26 @@ Answer: 39 ✅
 
 2. **Fixed vs Variable window:** This problem has a fixed window size (k is given). If no size is given and a condition is given instead (e.g., "sum ≤ target"), that's a variable window problem — a different strategy.
 
-3. **Use `long` not `int`:** With arr[i] up to 10^6 and k up to 10^6, the maximum possible sum is 10^12 — which overflows a 32-bit `int`. Always use `long` for sums in competitive programming.
+3. **`maxSum = windowSum` (not `Integer.MIN_VALUE`):** We initialize `maxSum` with the first window's sum directly — since we already computed it, there's no need to start from the smallest possible value.
 
 ---
 
 ## ⚠️ Edge Cases to Know
 
-| Case                   | What happens                                      |
-|------------------------|---------------------------------------------------|
-| k == n                 | Only one window — the entire array                |
-| k == 1                 | Answer is just the maximum element                |
-| All elements are 0     | Answer is 0                                       |
-| Large values (≤ 10^6)  | Use `long` to avoid integer overflow              |
+| Case              | What happens                           |
+|-------------------|----------------------------------------|
+| k == n            | Only one window — the entire array     |
+| k == 1            | Answer is just the maximum element     |
+| All elements are 0 | Answer is 0                           |
+| n < k             | No valid window exists → return 0      |
 
 ---
 
 ## 🏷️ Method Signature (GFG)
 
 ```java
-public long maximumSumSubarray(int k, ArrayList<Integer> arr, int n)
+// GFG online judge — Java
+public int maxSubarraySum(int[] arr, int k)
 ```
 
 ---
