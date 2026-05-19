@@ -196,7 +196,6 @@ Always use long for sums in competitive programming!
 
 
 
-
 # 🪟 Sliding Window Pattern — Beginner's Visual Guide
 
 > **One line summary:** Sliding window converts an **O(n × k)** nested loop into **O(n)** by reusing the previous window instead of recomputing from scratch.
@@ -309,38 +308,57 @@ REMOVE arr[i - k]   old element leaving from LEFT
 ```
  Index:   [  0  ]   [  1  ]   [  2  ]   [  3  ]
  Array:   [ 100 ]   [ 200 ]   [ 300 ]   [ 400 ]
+```
 
- ┌─────────────────────────────────────────────────────────────┐
- │                                                             │
- │  Step 1:  ╔═══════╗  ╔═══════╗                             │
- │           ║  100  ║  ║  200  ║   300    400                │
- │           ╚═══════╝  ╚═══════╝                             │
- │           sum = 100 + 200 = 300  │  maxSum = 300            │
- │                                                             │
- │  Step 2:     ╔═══════╗  ╔═══════╗                          │
- │           100 ║  200  ║  ║  300  ║   400                   │
- │              ╚═══════╝  ╚═══════╝                          │
- │           +300 (entering)  -100 (leaving)                   │
- │           sum = 300 + 300 - 100 = 500  │  maxSum = 500      │
- │                                                             │
- │  Step 3:               ╔═══════╗  ╔═══════╗                │
- │           100   200    ║  300  ║  ║  400  ║                │
- │                        ╚═══════╝  ╚═══════╝                │
- │           +400 (entering)  -200 (leaving)                   │
- │           sum = 500 + 400 - 200 = 700  │  maxSum = 700 ✅   │
- │                                                             │
- └─────────────────────────────────────────────────────────────┘
+```
+ ┌─────────────────────────────────────────────────────────────────────┐
+ │                                                                     │
+ │  Step 1:  ╔═══════╗  ╔═══════╗                                     │
+ │           ║  100  ║  ║  200  ║    300      400                     │
+ │           ╚═══════╝  ╚═══════╝                                     │
+ │                                                                     │
+ │           sum = 100 + 200 = 300    maxSum = 300                     │
+ │           (first window: just add k elements directly)              │
+ │                                                                     │
+ ├─────────────────────────────────────────────────────────────────────┤
+ │                                                                     │
+ │  Step 2:            ╔═══════╗  ╔═══════╗                           │
+ │            100      ║  200  ║  ║  300  ║    400                    │
+ │                     ╚═══════╝  ╚═══════╝                           │
+ │            └──out──┘                   └──in──┘                    │
+ │                                                                     │
+ │           sum = prevSum + arr[2] - arr[0]                          │
+ │               = 300     + 300    - 100   = 500    maxSum = 500      │
+ │                                                                     │
+ │  ❓ Why not just 200 + 300 = 500 directly?                          │
+ │     Both give 500, but sliding window does it in O(1).              │
+ │     If k = 100000, recomputing 100000 elements each step is slow.   │
+ │     Sliding window always does just 1 add + 1 subtract = O(1) ✅    │
+ │                                                                     │
+ ├─────────────────────────────────────────────────────────────────────┤
+ │                                                                     │
+ │  Step 3:                       ╔═══════╗  ╔═══════╗                │
+ │            100      200        ║  300  ║  ║  400  ║                │
+ │                                ╚═══════╝  ╚═══════╝                │
+ │                     └──out──┘                      └──in──┘        │
+ │                                                                     │
+ │           sum = prevSum + arr[3] - arr[1]                          │
+ │               = 500     + 400    - 200   = 700    maxSum = 700 ✅   │
+ │                                                                     │
+ └─────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
 ## 📋 Dry Run Table
 
-| `i` | Action | `windowSum` | `maxSum` |
-|-----|--------|------------|---------|
-| —   | First window: `arr[0]+arr[1]` = 100+200 | **300** | 300 |
-| 2   | `+arr[2]=300` · `-arr[0]=100` | **500** | 500 |
-| 3   | `+arr[3]=400` · `-arr[1]=200` | **700** | **700 ✅** |
+| `i` | Window elements | Action (sliding formula) | `windowSum` | `maxSum` |
+|-----|-----------------|--------------------------|-------------|---------|
+| —   | [100, 200] | First window: 100 + 200 | **300** | 300 |
+| 2   | [200, 300] | prevSum(300) + arr[2](300) − arr[0](100) | **500** | 500 |
+| 3   | [300, 400] | prevSum(500) + arr[3](400) − arr[1](200) | **700** | **700 ✅** |
+
+> **Note:** The "Window elements" column shows the actual window. The "Action" column shows the O(1) sliding formula — not a direct recompute. Both give the same answer, but the formula scales to any k size.
 
 ---
 
@@ -350,14 +368,14 @@ REMOVE arr[i - k]   old element leaving from LEFT
 function maxSumSubarray(arr, k):
     n = length of arr
 
-    // Step 3: starting window
+    // Step 3: starting window (only time we loop over k elements)
     windowSum = arr[0] + arr[1] + ... + arr[k-1]
     maxSum = windowSum
 
-    // Step 4: slide
+    // Step 4: slide — O(1) update per step
     for i from k to n-1:
-        windowSum = windowSum + arr[i]        // ← ADD   entering element
-        windowSum = windowSum - arr[i - k]    // ← REMOVE leaving element
+        windowSum = windowSum + arr[i]        // ← ADD   entering element (right)
+        windowSum = windowSum - arr[i - k]    // ← REMOVE leaving element (left)
         maxSum = max(maxSum, windowSum)
 
     return maxSum
@@ -374,7 +392,7 @@ function maxSumSubarray(arr, k):
  │ Naive (2 loops)   │   O(n × k)  ❌     │ Recomputes k elems every step  │
  │ Sliding Window    │   O(n)      ✅     │ Each element visited once      │
  ├───────────────────┼─────────────────────┼────────────────────────────────┤
- │ Space             │   O(1)      ✅     │ Only a few variables used      │
+ │ Space             │   O(1)      ✅     │ Only a few variables stored    │
  └───────────────────┴─────────────────────┴────────────────────────────────┘
 ```
 
@@ -383,17 +401,26 @@ function maxSumSubarray(arr, k):
 ## 💡 Key Insights
 
 ### 1. Sliding Window = Optimized Nested Loop
-Every time we slide, we do **one addition + one subtraction** instead of re-summing k elements.  
+Every slide does just **one add + one subtract** instead of re-summing k elements.
 That's why it goes from O(n × k) → O(n).
 
-### 2. Fixed vs Variable
+### 2. "Why not just recompute directly?" — The k problem
+
+```
+Small k (k=2):   200 + 300 = 500  ← only 2 operations, seems fine
+Large k (k=100000): elem1 + elem2 + ... + elem100000 ← 100000 ops per step! ❌
+
+Sliding window:  prevSum + newElem - oldElem ← always 2 ops, any k ✅
+```
+
+### 3. Fixed vs Variable
 
 ```
 Fixed window   → k is given → loop i from k to n, add arr[i], remove arr[i-k]
 Variable window → condition given → two pointer approach, shrink window when condition breaks
 ```
 
-### 3. ⚠️ Always use `long` not `int` for sums!
+### 4. ⚠️ Always use `long` not `int` for sums!
 
 ```
 Max arr[i] = 10^6
@@ -419,6 +446,7 @@ long windowSum = 0;
 ╠══════════════════════════════════════════════════════════════╣
 ║  Pattern type  : Array / String / Subarray problems          ║
 ║  Key operation : ADD entering · REMOVE leaving               ║
+║  Formula       : newSum = prevSum + arr[i] - arr[i-k]        ║
 ║  Time          : O(n)   — one pass through array             ║
 ║  Space         : O(1)   — no extra array needed              ║
 ╠══════════════════════════════════════════════════════════════╣
