@@ -192,3 +192,255 @@ Variable Window → condition is given  → use two pointers (left, right), shri
 
 Always use long for sums in competitive programming!
 ```
+
+
+
+
+
+# 🪟 Sliding Window Pattern — Beginner's Visual Guide
+
+> **One line summary:** Sliding window converts an **O(n × k)** nested loop into **O(n)** by reusing the previous window instead of recomputing from scratch.
+
+---
+
+## 🧠 The Core Idea — In One Picture
+
+```
+Instead of this (slow — recomputes every time):
+┌─────────────────────────────────────────┐
+│  for each starting position i:          │
+│    for j from i to i+k:                 │  ← O(n × k) ❌
+│      sum += arr[j]                      │
+└─────────────────────────────────────────┘
+
+Do this instead (fast — reuse previous sum):
+┌─────────────────────────────────────────┐
+│  windowSum += arr[i]     ← ADD entering │
+│  windowSum -= arr[i-k]   ← REMOVE leaving  O(n) ✅
+└─────────────────────────────────────────┘
+```
+
+---
+
+## ✅ When to Use vs Skip
+
+```
+✅ USE Sliding Window when...           ❌ SKIP when...
+─────────────────────────────────────   ──────────────────────────────
+ Input is an array / string / list       Data is a Linked List
+ You need a subarray or substring        Elements are non-contiguous
+ Goal: max, min, sum, count              Elements are unordered
+ Condition: "at most K", "exactly K"     No fixed or conditional window
+```
+
+---
+
+## 📦 Two Types of Sliding Window
+
+```
+                     Sliding Window
+                           │
+         ──────────────────┴────────────────────
+         │                                      │
+  ┌─────────────────┐               ┌───────────────────────┐
+  │  Fixed Window   │               │   Variable Window     │
+  │  (k is given)   │               │   (condition given)   │
+  └─────────────────┘               └───────────────────────┘
+         │                                      │
+  Window size stays the same         Window grows and shrinks
+         │                                      │
+  Example:                           Example:
+  "Max sum of subarray               "Longest subarray
+   of size k"                         with sum ≤ target"
+```
+
+---
+
+## 🧩 4-Step Framework (works for ANY sliding window problem)
+
+```
+╔═══════╦══════════════════════════════════════════════════════════╗
+║ Step  ║ What to do                                               ║
+╠═══════╬══════════════════════════════════════════════════════════╣
+║  1    ║ Is it subarray/substring? max/min/sum/count?             ║
+║       ║ If YES → Sliding Window ✅                               ║
+╠═══════╬══════════════════════════════════════════════════════════╣
+║  2    ║ Fixed or Variable?                                       ║
+║       ║ k given directly → Fixed                                 ║
+║       ║ Condition given (e.g. sum ≤ k) → Variable                ║
+╠═══════╬══════════════════════════════════════════════════════════╣
+║  3    ║ Find starting window data                                ║
+║       ║ Compute sum of first k elements manually                 ║
+╠═══════╬══════════════════════════════════════════════════════════╣
+║  4    ║ Slide the window                                         ║
+║       ║ ADD  → arr[i]       (new element entering from right)    ║
+║       ║ REMOVE → arr[i-k]   (old element leaving from left)      ║
+╚═══════╩══════════════════════════════════════════════════════════╝
+```
+
+---
+
+## 🔍 Worked Example — Maximum Sum of Subarray of Size K
+
+**Problem:** `arr = [100, 200, 300, 400]`, `k = 2` → Find max sum of any subarray of size 2.
+
+### Step 1 — Identify pattern
+Finding **max sum of subarray** → Sliding Window ✅
+
+### Step 2 — Fixed or Variable?
+`k = 2` is given directly → **Fixed size window**
+
+### Step 3 — Starting window
+```
+arr[0] + arr[1]  =  100 + 200  =  300
+```
+
+### Step 4 — Slide it!
+
+```
+ADD    arr[i]       new element entering from RIGHT
+REMOVE arr[i - k]   old element leaving from LEFT
+```
+
+---
+
+## 🎥 Visual — Watch the Window Slide
+
+```
+ Index:   [  0  ]   [  1  ]   [  2  ]   [  3  ]
+ Array:   [ 100 ]   [ 200 ]   [ 300 ]   [ 400 ]
+
+ ┌─────────────────────────────────────────────────────────────┐
+ │                                                             │
+ │  Step 1:  ╔═══════╗  ╔═══════╗                             │
+ │           ║  100  ║  ║  200  ║   300    400                │
+ │           ╚═══════╝  ╚═══════╝                             │
+ │           sum = 100 + 200 = 300  │  maxSum = 300            │
+ │                                                             │
+ │  Step 2:     ╔═══════╗  ╔═══════╗                          │
+ │           100 ║  200  ║  ║  300  ║   400                   │
+ │              ╚═══════╝  ╚═══════╝                          │
+ │           +300 (entering)  -100 (leaving)                   │
+ │           sum = 300 + 300 - 100 = 500  │  maxSum = 500      │
+ │                                                             │
+ │  Step 3:               ╔═══════╗  ╔═══════╗                │
+ │           100   200    ║  300  ║  ║  400  ║                │
+ │                        ╚═══════╝  ╚═══════╝                │
+ │           +400 (entering)  -200 (leaving)                   │
+ │           sum = 500 + 400 - 200 = 700  │  maxSum = 700 ✅   │
+ │                                                             │
+ └─────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 📋 Dry Run Table
+
+| `i` | Action | `windowSum` | `maxSum` |
+|-----|--------|------------|---------|
+| —   | First window: `arr[0]+arr[1]` = 100+200 | **300** | 300 |
+| 2   | `+arr[2]=300` · `-arr[0]=100` | **500** | 500 |
+| 3   | `+arr[3]=400` · `-arr[1]=200` | **700** | **700 ✅** |
+
+---
+
+## 💻 Pseudocode
+
+```
+function maxSumSubarray(arr, k):
+    n = length of arr
+
+    // Step 3: starting window
+    windowSum = arr[0] + arr[1] + ... + arr[k-1]
+    maxSum = windowSum
+
+    // Step 4: slide
+    for i from k to n-1:
+        windowSum = windowSum + arr[i]        // ← ADD   entering element
+        windowSum = windowSum - arr[i - k]    // ← REMOVE leaving element
+        maxSum = max(maxSum, windowSum)
+
+    return maxSum
+```
+
+---
+
+## ⏱️ Complexity Analysis
+
+```
+ ┌───────────────────┬─────────────────────┬────────────────────────────────┐
+ │ Approach          │ Time Complexity     │ Why                            │
+ ├───────────────────┼─────────────────────┼────────────────────────────────┤
+ │ Naive (2 loops)   │   O(n × k)  ❌     │ Recomputes k elems every step  │
+ │ Sliding Window    │   O(n)      ✅     │ Each element visited once      │
+ ├───────────────────┼─────────────────────┼────────────────────────────────┤
+ │ Space             │   O(1)      ✅     │ Only a few variables used      │
+ └───────────────────┴─────────────────────┴────────────────────────────────┘
+```
+
+---
+
+## 💡 Key Insights
+
+### 1. Sliding Window = Optimized Nested Loop
+Every time we slide, we do **one addition + one subtraction** instead of re-summing k elements.  
+That's why it goes from O(n × k) → O(n).
+
+### 2. Fixed vs Variable
+
+```
+Fixed window   → k is given → loop i from k to n, add arr[i], remove arr[i-k]
+Variable window → condition given → two pointer approach, shrink window when condition breaks
+```
+
+### 3. ⚠️ Always use `long` not `int` for sums!
+
+```
+Max arr[i] = 10^6
+Max k      = 10^6
+Max sum    = 10^12   ← OVERFLOWS int (max ~2.1 × 10^9)
+```
+
+```java
+// ❌ Wrong — silent overflow bug
+int windowSum = 0;
+
+// ✅ Correct
+long windowSum = 0;
+```
+
+---
+
+## 🧠 Quick Summary Card
+
+```
+╔══════════════════════════════════════════════════════════════╗
+║           SLIDING WINDOW — QUICK REFERENCE                   ║
+╠══════════════════════════════════════════════════════════════╣
+║  Pattern type  : Array / String / Subarray problems          ║
+║  Key operation : ADD entering · REMOVE leaving               ║
+║  Time          : O(n)   — one pass through array             ║
+║  Space         : O(1)   — no extra array needed              ║
+╠══════════════════════════════════════════════════════════════╣
+║  Fixed window  : k is given → classic sliding                ║
+║  Variable win  : condition given → two pointers + shrink     ║
+╠══════════════════════════════════════════════════════════════╣
+║  ⚠️  Always use long for sum in CP — int can overflow!       ║
+╚══════════════════════════════════════════════════════════════╝
+```
+
+---
+
+## 📚 Practice Problems
+
+| # | Problem | Type | Difficulty |
+|---|---------|------|------------|
+| 1 | Max sum subarray of size k | Fixed | ⭐ Easy |
+| 2 | Average of every k-size window | Fixed | ⭐ Easy |
+| 3 | Longest subarray with sum ≤ k | Variable | ⭐⭐ Medium |
+| 4 | Longest substring with at most K distinct chars | Variable | ⭐⭐ Medium |
+| 5 | Minimum window substring | Variable | ⭐⭐⭐ Hard |
+
+---
+
+*Made while learning DSA — one pattern at a time.* 🚀
