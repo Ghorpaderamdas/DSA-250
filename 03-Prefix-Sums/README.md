@@ -550,22 +550,7 @@ long[] prefix = new long[n];
 ╚══════════════════════════════════════════════════════════════╝
 ```
 
----
 
-## 📚 Practice Problems
-
-| # | Problem | Type | Difficulty |
-|---|---------|------|------------|
-| 1 | Range Sum Query — Immutable (LC 303) | 1D Prefix | ⭐ Easy |
-| 2 | Find Pivot Index (LC 724) | Prefix = Suffix | ⭐ Easy |
-| 3 | Subarray Sum Equals K (LC 560) | Prefix + HashMap | ⭐⭐ Medium |
-| 4 | Product of Array Except Self (LC 238) | Prefix × Suffix | ⭐⭐ Medium |
-| 5 | Continuous Subarray Sum (LC 523) | Prefix + Modulo | ⭐⭐ Medium |
-| 6 | Range Sum Query 2D — Immutable (LC 304) | 2D Prefix | ⭐⭐ Medium |
-| 7 | Count Subarrays with Given XOR | Prefix XOR + HashMap | ⭐⭐ Medium |
-| 8 | Corporate Flight Bookings (LC 1109) | Difference Array | ⭐⭐ Medium |
-
----
 
 > 📌 **Next Topic:** [04 - Two Pointers](../04-Two-Pointers/README.md)  
 > 📌 **Previous Topic:** [02 - Sliding Window](../02-Sliding-Window/README.md)
