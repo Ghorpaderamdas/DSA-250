@@ -248,28 +248,7 @@ Do this instead (fast — use sorted property):
  Remove duplicates / partition            Index positions must stay unchanged
 ```
 
----
 
-## 📦 Two Types of Two Pointers
-
-```
-                     Two Pointers
-                           │
-         ──────────────────┴────────────────────
-         │                                      │
-  ┌─────────────────────┐          ┌─────────────────────────┐
-  │  Opposite Ends      │          │   Same Direction        │
-  │  left=0, right=n-1  │          │   slow=0, fast=0 or 1   │
-  └─────────────────────┘          └─────────────────────────┘
-         │                                      │
-  Pointers move inward                Pointers move forward
-         │                                      │
-  Example:                            Example:
-  "Find pair with sum = target"       "Remove duplicates
-   in sorted array"                    from sorted array"
-```
-
----
 
 ## 🧩 4-Step Framework (works for ANY two pointers problem)
 
@@ -498,22 +477,6 @@ hasPairWithSum(arr, 6);   // now works correctly
 
 ---
 
-## 📚 Practice Problems
 
-| # | Problem | Type | Difficulty |
-|---|---------|------|------------|
-| 1 | Pair Sum in Sorted Array (LC 167) | Opposite Ends | ⭐ Easy |
-| 2 | Valid Palindrome (LC 125) | Opposite Ends | ⭐ Easy |
-| 3 | Given Sum Pair | Opposite Ends | ⭐ Easy |
-| 4 | 3Sum (LC 15) | Opposite Ends + Fix one | ⭐⭐ Medium |
-| 5 | Container With Most Water (LC 11) | Opposite Ends | ⭐⭐ Medium |
-| 6 | Sort Colors / Dutch National Flag (LC 75) | Same Direction | ⭐⭐ Medium |
-| 7 | Segregate 0s and 1s | Same Direction | ⭐⭐ Medium |
-| 8 | Trapping Rain Water (LC 42) | Opposite Ends | ⭐⭐⭐ Hard |
-
----
-
-> 📌 **Next Topic:** [02 - Sliding Window](../02-Sliding-Window/README.md)  
-> 📌 **Previous Topic:** [00 - Arrays Basics](../00-Arrays/README.md)
 
 *Made while learning DSA — one pattern at a time.* 🚀
