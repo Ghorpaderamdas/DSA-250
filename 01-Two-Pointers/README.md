@@ -45,6 +45,9 @@ Result: **O(n)** — one single pass through the array. That's the magic.
     • Check if palindrome                • Slow + Fast pointer (cycle detection)
 ```
 
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/33e8e6b0-712f-45ba-b020-5fafbc26e893" />
+
+
 ---
 
 ## 🧩 4-Step Framework (works for ANY two pointers problem)
