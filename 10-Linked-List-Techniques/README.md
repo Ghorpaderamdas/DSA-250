@@ -1,6 +1,6 @@
-# 🔗 Linked Lists — Beginner's Complete Notes
+# 🔗 Linked Lists in Java — Beginner's Complete Notes
 
-> **One read = full understanding.** Visual diagrams, tables, mind maps — sab kuch andar hai.
+> **One read = full understanding.** Visual diagrams, tables, mind maps, Java code — sab kuch andar hai.
 
 ---
 
@@ -28,23 +28,32 @@ HEAD
  │
  ▼
 ┌──────┬──────┐     ┌──────┬──────┐     ┌──────┬──────┐
-│  10  │ 1004 │────▶│  25  │ 1008 │────▶│  18  │ NULL │
+│  10  │ 1004 │────▶│  25  │ 1008 │────▶│  18  │ null │
 └──────┴──────┘     └──────┴──────┘     └──────┴──────┘
  @1001                @1004               @1008 (last)
  [data] [next]
 ```
 
-💡 **Think of it like a treasure hunt** — each clue (node) tells you where the next clue is. Last clue says `NULL` = hunt over.
+💡 **Think of it like a treasure hunt** — each clue (node) tells you where the next clue is. Last clue says `null` = hunt over.
 
-### Node Structure in C
+> Note: in Java you never see/print these raw addresses — `next` is a **reference** to a `Node` object on the heap (conceptually "points to" the next node, but the JVM manages the actual memory for you). The `@1001`-style addresses above are just for visualizing the idea.
 
-```c
-struct node {
-    int data;           // stores the value
-    struct node *next;  // stores address of next node
-};
-typedef struct node* nptr;
+### Node Structure in Java
+
+```java
+class Node {
+    int data;     // stores the value
+    Node next;    // reference to the next node
+
+    Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+// head = reference to the first node (head == null  →  empty list)
 ```
+
+> 💡 In Java there are no raw pointers/`malloc`/`free`. A `Node` variable holds a **reference** to an object on the heap, and the **garbage collector** automatically frees a node once nothing references it anymore (no manual `free()`).
 
 ### ✅ Advantages
 
@@ -60,7 +69,7 @@ typedef struct node* nptr;
 | Problem | Impact |
 |---|---|
 | No random access | Must traverse from head — O(n) to reach any element |
-| Extra memory | Each node stores a pointer too |
+| Extra memory | Each node stores a reference too |
 | No backward traversal | In singly LL — can only go forward |
 | Cache unfriendly | Nodes scattered in RAM — slow for CPU cache |
 
@@ -73,9 +82,9 @@ typedef struct node* nptr;
 | Memory allocation | ❌ Static (compile time) | ✅ Dynamic (runtime) |
 | Size | ❌ Fixed — must know in advance | ✅ Grows/shrinks freely |
 | Access element | ✅ O(1) — index directly | ❌ O(n) — traverse one by one |
-| Insert at beginning | ❌ O(n) — shift all elements | ✅ O(1) — just change pointers |
-| Delete element | ❌ O(n) — shifting needed | ✅ O(1) if you have pointer |
-| Memory per element | ✅ Compact — data only | ❌ Extra — pointer per node |
+| Insert at beginning | ❌ O(n) — shift all elements | ✅ O(1) — just change references |
+| Delete element | ❌ O(n) — shifting needed | ✅ O(1) if you have the reference |
+| Memory per element | ✅ Compact — data only | ❌ Extra — reference per node |
 | Cache performance | ✅ Excellent — contiguous | ❌ Poor — scattered in RAM |
 | Best used for | Sorting, searching, indexing | Stacks, queues, trees, graphs |
 
@@ -91,8 +100,8 @@ typedef struct node* nptr;
    🔹 Singly   🔄 Circular  ↔️ Doubly   ⚙️ Ops   📐 Poly   🔲 Sparse
       LL          LL          LL                               Matrix
         │         │           │           │          │          │
-   data+next  last→head   prev+data    Insert   coeff+expo  Triplet /
-   one dir    no NULL      +next       Delete   per node    Linked
+   data+next  last→head   prev+data    Insert   coef+expo   Triplet /
+   one dir    no null      +next       Delete   per node    Linked
               end         both dir     Display              repr
 ```
 
@@ -102,11 +111,11 @@ typedef struct node* nptr;
 
 ### Type 1 — Singly Linked List
 ```
-[1] ──▶ [2] ──▶ [3] ──▶ NULL
+[1] ──▶ [2] ──▶ [3] ──▶ null
 ```
 - Each node: `data + next`
 - One direction only (forward)
-- Last node → `next = NULL`
+- Last node → `next = null`
 
 ---
 
@@ -116,7 +125,7 @@ typedef struct node* nptr;
  ▲                     │
  └─────────────────────┘
 ```
-- Same as singly BUT last node → `next = HEAD` (not NULL)
+- Same as singly BUT last node → `next = head` (not `null`)
 - No real "end" — it loops forever
 - Traverse stops when `p == head` again
 
@@ -124,11 +133,11 @@ typedef struct node* nptr;
 
 ### Type 3 — Doubly Linked List
 ```
-NULL ◀─ [1] ⇄ [2] ⇄ [3] ─▶ NULL
+null ◀─ [1] ⇄ [2] ⇄ [3] ─▶ null
 ```
 - Each node: `prev + data + next`
 - Can traverse both forward AND backward
-- First node's `prev = NULL`, Last node's `next = NULL`
+- First node's `prev = null`, Last node's `next = null`
 
 ---
 
@@ -136,13 +145,18 @@ NULL ◀─ [1] ⇄ [2] ⇄ [3] ─▶ NULL
 
 ### 5.1 Node Structure (self-referential)
 
-```c
-struct node {
+```java
+class Node {
     int data;
-    struct node *next;   // pointer to same type = self-referential
-};
-// head = address of first node
-// head->next = NULL means empty list
+    Node next;   // reference to same type = self-referential
+
+    Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+// head = reference to first node
+// head == null means empty list
 ```
 
 ---
@@ -152,38 +166,46 @@ struct node {
 #### 📍 Insert at Beginning
 
 ```
-BEFORE:  HEAD ──▶ [10] ──▶ [25] ──▶ NULL
-AFTER:   HEAD ──▶ [5] ──▶ [10] ──▶ [25] ──▶ NULL
+BEFORE:  HEAD ──▶ [10] ──▶ [25] ──▶ null
+AFTER:   HEAD ──▶ [5] ──▶ [10] ──▶ [25] ──▶ null
                    ↑
                   NEW
 ```
 
 **Steps:**
+```java
+Node newNode = new Node(x);
+newNode.next = head;     // new node points to old first node
+head = newNode;          // head now points to new node
 ```
-1. new = malloc(sizeof(node))
-2. new->data = x
-3. new->next = head->next      ← new points to old first node
-4. head->next = new            ← head now points to new node
-```
+> O(1) — works even on an empty list, since `head` would simply be `null` and `newNode.next = null`.
 
 ---
 
 #### 📍 Insert at End
 
 ```
-BEFORE:  HEAD ──▶ [10] ──▶ [25] ──▶ NULL
-AFTER:   HEAD ──▶ [10] ──▶ [25] ──▶ [99] ──▶ NULL
+BEFORE:  HEAD ──▶ [10] ──▶ [25] ──▶ null
+AFTER:   HEAD ──▶ [10] ──▶ [25] ──▶ [99] ──▶ null
                                       ↑
                                      NEW
 ```
 
 **Steps:**
-```
-1. new = malloc(sizeof(node))
-2. new->data = x
-3. new->next = NULL
-4. Traverse till last node (temp->next == NULL)
-5. temp->next = new            ← link last node to new
+```java
+Node newNode = new Node(x);
+newNode.next = null;
+
+if (head == null) {            // empty list → new node becomes head
+    head = newNode;
+    return;
+}
+
+Node temp = head;
+while (temp.next != null)      // traverse till last node
+    temp = temp.next;
+
+temp.next = newNode;           // link last node to new node
 ```
 
 ---
@@ -191,17 +213,17 @@ AFTER:   HEAD ──▶ [10] ──▶ [25] ──▶ [99] ──▶ NULL
 #### 📍 Insert at Specific Position (before/after a node)
 
 **After a node:**
-```
-1. Find target node (temp)
-2. new->next = temp->next
-3. temp->next = new
+```java
+// temp = the target node we found
+newNode.next = temp.next;
+temp.next = newNode;
 ```
 
 **Before a node:**
-```
-1. Find node before target (prev)
-2. new->next = prev->next      ← new points to target
-3. prev->next = new            ← prev now points to new
+```java
+// prev = the node just before the target
+newNode.next = prev.next;      // new points to target
+prev.next = newNode;           // prev now points to new
 ```
 
 ---
@@ -210,62 +232,80 @@ AFTER:   HEAD ──▶ [10] ──▶ [25] ──▶ [99] ──▶ NULL
 
 | Where | Steps | Edge Case |
 |---|---|---|
-| **From Beginning** | `head->next = head->next->next` then free old first | If only 1 node: `head->next = NULL` |
-| **From End** | Use 2 pointers → traverse → `temp2->next = NULL` → free temp1 | If only 1 node: `head->next = NULL` |
-| **Specific Node** | Find node + track prev → `prev->next = node->next` → free node | Check if first / last / only node |
+| **From Beginning** | `head = head.next` | If only 1 node: `head = null` |
+| **From End** | Use 2 references → traverse → `secondLast.next = null` | If only 1 node: `head = null` |
+| **Specific Node** | Find node + track `prev` → `prev.next = curr.next` | Check if first / last / only node |
 
-#### Visual — Delete from End (2-pointer trick)
+> Java has no `free()` — once `prev.next` (or `head`) stops referencing a node, the **garbage collector** reclaims it automatically.
+
+#### Visual — Delete from End (2-reference trick)
 
 ```
-temp2    temp1
+ prev     curr
   │        │
   ▼        ▼
-[H] ──▶ [10] ──▶ [25] ──▶ [18] ──▶ NULL
+[H] ──▶ [10] ──▶ [25] ──▶ [18] ──▶ null
                   │         │
-                temp2     temp1  ← stop when temp1->next == NULL
+                 prev      curr  ← stop when curr.next == null
                   │
-                  └── temp2->next = NULL  ← cut here
-                      free(temp1)
+                  └── prev.next = null  ← cut here
+                      (curr is now unreferenced → GC reclaims it)
 ```
 
-> ⚠️ **Common mistake:** Always use 2 pointers for end/specific deletion. One (temp1) finds the target, other (temp2) tracks the previous node.
+```java
+if (head == null) return;                 // empty list
+if (head.next == null) { head = null; return; }   // only 1 node
+
+Node prev = head, curr = head.next;
+while (curr.next != null) {                // walk till curr is the last node
+    prev = curr;
+    curr = curr.next;
+}
+prev.next = null;                          // cut the link to the last node
+```
+
+> ⚠️ **Common mistake:** Always keep 2 references for end/specific deletion. One (`curr`) finds the target, the other (`prev`) tracks the node just before it — you need `prev` to re-link the list.
 
 ---
 
 ### 5.4 DISPLAY (Traversal)
 
-```c
-void displaylist(nptr h) {
-    nptr p;
-    if (h->next == NULL) {
-        printf("empty list");
+```java
+void displayList(Node head) {
+    if (head == null) {
+        System.out.println("empty list");
         return;
     }
-    for (p = h->next; p != NULL; p = p->next)
-        printf("%d\t", p->data);
+    Node p = head;
+    while (p != null) {
+        System.out.print(p.data + "\t");
+        p = p.next;
+    }
 }
 ```
 
 **Flow:**
 ```
-p = head->next
-While p != NULL:
-    print p->data
-    p = p->next
+p = head
+While p != null:
+    print p.data
+    p = p.next
 ```
 
 ---
 
 ### 5.5 SEARCH (Find Node)
 
-```
-p = head
-While p->next != NULL:
-    if p->next->data == target:
-        print "found"
-        return
-    p = p->next
-print "not found"
+```java
+boolean search(Node head, int target) {
+    Node p = head;
+    while (p != null) {
+        if (p.data == target)
+            return true;        // found
+        p = p.next;
+    }
+    return false;               // not found
+}
 ```
 
 ---
@@ -288,37 +328,54 @@ print "not found"
 
 | | Singly LL | Circular LL |
 |---|---|---|
-| Last node's next | `NULL` | `head` |
-| Empty check | `head->next == NULL` | `head->next == head` |
-| Traverse stop | `p != NULL` | `p != head` |
-| Insert at end | `new->next = NULL` | `new->next = head` |
+| Last node's next | `null` | `head` |
+| Empty check | `head == null` | `head == null` |
+| Traverse stop | `p != null` | `do…while (p != head)` |
+| Insert at end | `newNode.next = null` | `newNode.next = head` |
 
 ### Insert at Beginning (Circular)
 
-```
-1. new = malloc(sizeof(node))
-2. new->data = x
-3. new->next = head->next      ← new points to first real node
-4. head->next = new            ← head points to new
-   (for fresh empty: head->next = head)
+```java
+Node newNode = new Node(x);
+
+if (head == null) {                 // empty list → points to itself
+    newNode.next = newNode;
+    head = newNode;
+    return;
+}
+
+Node last = head;
+while (last.next != head)           // find the last node
+    last = last.next;
+
+newNode.next = head;                // new points to old first node
+last.next = newNode;                // last node points to new node
+head = newNode;                     // head now points to new node
 ```
 
 ### Delete from Beginning (Circular)
 
-```
-1. temp1 = head, temp2 = head
-2. If only 1 node: head = NULL, free(temp1)
-3. Else: traverse temp1 to last node (temp1->next == head)
-4. head = temp2->next          ← move head to second node
-5. temp1->next = head          ← last node points to new head
-6. free(temp2)
+```java
+if (head == null) return;                    // empty list
+
+if (head.next == head) {                     // only 1 node
+    head = null;
+    return;
+}
+
+Node last = head;
+while (last.next != head)                    // find the last node
+    last = last.next;
+
+head = head.next;                            // move head to second node
+last.next = head;                            // last node points to new head
 ```
 
 ---
 
 ## 7. Doubly Linked List
 
-> Each node has **3 parts**: `prev pointer + data + next pointer`
+> Each node has **3 parts**: `prev reference + data + next reference`
 
 ```
          ┌─────────┬──────┬─────────┐
@@ -332,62 +389,82 @@ print "not found"
 ### Full Example
 
 ```
-NULL ◀──┬──────────┬──▶ ◀──┬──────────┬──▶ ◀──┬──────────┬──▶ NULL
-        │NULL│10│→1008│    │←1001│20│→1012│    │←1008│30│NULL│
+null ◀──┬──────────┬──▶ ◀──┬──────────┬──▶ ◀──┬──────────┬──▶ null
+        │null│10│→1008│    │←1001│20│→1012│    │←1008│30│null│
         └──────────┘        └──────────┘        └──────────┘
           Node 1               Node 2               Node 3
 ```
 
-### C Structure
+### Java Class
 
-```c
-struct node {
-    struct node *prev;   // link1: points to previous node
+```java
+class Node {
+    Node prev;   // link1: reference to previous node
     int data;
-    struct node *next;   // link2: points to next node
-};
+    Node next;   // link2: reference to next node
+
+    Node(int data) {
+        this.data = data;
+        this.prev = null;
+        this.next = null;
+    }
+}
 ```
 
 ### Rules to remember
 
 ```
 ✅ head always points to first node
-✅ first node → prev = NULL
-✅ last node  → next = NULL
+✅ first node → prev = null
+✅ last node  → next = null
 ✅ Can traverse forward (using next) AND backward (using prev)
 ```
 
 ### Insert at Beginning (Doubly LL)
 
-```
-1. Create newNode
-2. newNode->previous = NULL
-3. If list empty:
-      newNode->next = NULL, head = newNode
-4. If list NOT empty:
-      newNode->next = head
-      head = newNode
+```java
+Node newNode = new Node(x);
+newNode.prev = null;
+newNode.next = head;
+
+if (head != null)            // list was NOT empty
+    head.prev = newNode;
+
+head = newNode;
 ```
 
 ### Insert at End (Doubly LL)
 
-```
-1. Create newNode, newNode->next = NULL
-2. If list empty: newNode->prev = NULL, head = newNode
-3. Else traverse to last node (temp->next == NULL)
-4. temp->next = newNode
-5. newNode->prev = temp
+```java
+Node newNode = new Node(x);
+newNode.next = null;
+
+if (head == null) {          // empty list
+    newNode.prev = null;
+    head = newNode;
+    return;
+}
+
+Node temp = head;
+while (temp.next != null)    // traverse to last node
+    temp = temp.next;
+
+temp.next = newNode;
+newNode.prev = temp;
 ```
 
 ### Delete from Beginning (Doubly LL)
 
-```
-1. temp = head
-2. If only 1 node: head = NULL, free(temp)
-3. Else:
-      head = temp->next
-      head->previous = NULL
-      free(temp)
+```java
+if (head == null) return;            // empty list
+
+if (head.next == null) {             // only 1 node
+    head = null;
+    return;
+}
+
+head = head.next;
+head.prev = null;
 ```
 
 ---
@@ -398,12 +475,12 @@ struct node {
 
 ### Node Structure
 
-```c
-struct node {
+```java
+class Node {
     int coef;    // coefficient (4, 6, 10, 6)
     int expo;    // exponent   (3, 2,  1, 0)
-    nptr next;
-};
+    Node next;
+}
 ```
 
 ### Visual
@@ -412,7 +489,7 @@ struct node {
 POLY
  │
  ▼
-[HEAD] ──▶ [coef=4│expo=3│next] ──▶ [coef=6│expo=2│next] ──▶ [coef=10│expo=1│next] ──▶ [coef=6│expo=0│NULL]
+[HEAD] ──▶ [coef=4│expo=3│next] ──▶ [coef=6│expo=2│next] ──▶ [coef=10│expo=1│next] ──▶ [coef=6│expo=0│null]
 
 = 4x³ + 6x² + 10x + 6
 ```
@@ -422,19 +499,19 @@ POLY
 ```
 p = first poly, q = second poly, r = result list
 
-While p != NULL AND q != NULL:
+While p != null AND q != null:
     ┌─────────────────────────────────────────────────────┐
-    │ if p->expo == q->expo:                              │
-    │     r->coef = p->coef + q->coef   ← add both      │
-    │     r->expo = p->expo                              │
-    │     advance BOTH p and q                           │
+    │ if p.expo == q.expo:                                │
+    │     r.coef = p.coef + q.coef      ← add both       │
+    │     r.expo = p.expo                                 │
+    │     advance BOTH p and q                            │
     │                                                     │
-    │ else if p->expo > q->expo:                          │
-    │     r->coef = p->coef             ← copy p's term  │
+    │ else if p.expo > q.expo:                            │
+    │     r.coef = p.coef               ← copy p's term  │
     │     advance only p                                  │
     │                                                     │
-    │ else (q->expo > p->expo):                           │
-    │     r->coef = q->coef             ← copy q's term  │
+    │ else (q.expo > p.expo):                             │
+    │     r.coef = q.coef               ← copy q's term  │
     │     advance only q                                  │
     └─────────────────────────────────────────────────────┘
 
@@ -503,8 +580,8 @@ Header Node:                    Element Node:
 ```
 
 - `H0, H1, H2...` = header nodes for each row/column
-- Each row forms its own linked list (using `right` pointer)
-- Each column forms its own linked list (using `down` pointer)
+- Each row forms its own linked list (using the `right` reference)
+- Each column forms its own linked list (using the `down` reference)
 
 ---
 
@@ -514,18 +591,18 @@ Header Node:                    Element Node:
 
 | Topic | Key Point | Don't Forget |
 |---|---|---|
-| **Node** | `data + *next` | Last node → `next = NULL` |
-| **Head** | Points to first node | Empty: `head->next == NULL` |
-| **Insert at start** | `new->next = head->next; head->next = new` | O(1) — super fast |
-| **Insert at end** | Traverse to last → `last->next = new` | O(n) — must traverse |
-| **Delete from start** | `head->next = head->next->next` | Always `free()` deleted node |
-| **Delete from end** | 2 pointers (temp1 + temp2) → `temp2->next = NULL` | Check single-node edge case |
-| **Circular LL** | `last->next = head` (not NULL) | Loop stop: `p == head` |
-| **Doubly LL** | `prev + data + next` per node | `first->prev = NULL`, `last->next = NULL` |
-| **Polynomial node** | `coeff + expo + next` | Add when exponents are equal |
+| **Node** | `int data; Node next;` | Last node → `next = null` |
+| **Head** | Reference to first node | Empty: `head == null` |
+| **Insert at start** | `newNode.next = head; head = newNode;` | O(1) — super fast |
+| **Insert at end** | Traverse to last → `last.next = newNode;` | O(n) — must traverse |
+| **Delete from start** | `head = head.next;` | GC reclaims the old node automatically |
+| **Delete from end** | 2 references (`prev` + `curr`) → `prev.next = null;` | Check single-node edge case |
+| **Circular LL** | `last.next = head` (not `null`) | Loop stop: `p == head` |
+| **Doubly LL** | `prev + data + next` per node | `first.prev = null`, `last.next = null` |
+| **Polynomial node** | `coef + expo + next` | Add when exponents are equal |
 | **Sparse matrix Triplet** | `(row, col, value)` only for non-zeros | Row 0 = metadata |
 | **Time: Access** | O(n) — no direct index | No random access! |
-| **Time: Insert/Delete head** | O(1) — just pointer change | Only if you already have the pointer |
+| **Time: Insert/Delete head** | O(1) — just reference change | Only if you already have the reference |
 
 ---
 
@@ -534,10 +611,10 @@ Header Node:                    Element Node:
 ```
 For EVERY operation, ask yourself:
 
-  1️⃣  Is the list empty?          → head->next == NULL
-  2️⃣  Does it have only 1 node?   → head->next->next == NULL
-  3️⃣  Is target the first node?   → temp == head->next
-  4️⃣  Is target the last node?    → temp->next == NULL
+  1️⃣  Is the list empty?          → head == null
+  2️⃣  Does it have only 1 node?   → head.next == null
+  3️⃣  Is target the first node?   → temp == head
+  4️⃣  Is target the last node?    → temp.next == null
 
 Missing any of these = wrong answer in exam.
 ```
@@ -556,8 +633,8 @@ SINGLY LL OPERATIONS
   At End       ─── O(n)     From End       ─ O(n)
   At Position  ─── O(n)     Specific Node  ─ O(n)
 
-  CIRCULAR LL: same ops, but check head instead of NULL
-  DOUBLY LL: same ops, but also update prev pointers
+  CIRCULAR LL: same ops, but check `head` instead of `null`
+  DOUBLY LL: same ops, but also update `prev` references
 ```
 
 ---
