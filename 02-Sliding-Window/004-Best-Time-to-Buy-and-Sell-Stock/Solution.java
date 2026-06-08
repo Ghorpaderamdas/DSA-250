@@ -1,4 +1,4 @@
-package p004;
+package p010;
 
 /**
  * Problem: Best Time to Buy and Sell Stock
