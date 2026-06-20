@@ -46,39 +46,6 @@
 | 25 | Design Problems               | [25-Design-Problems](./25-Design-Problems)             | 0      | 10    |
 
 ---
-
-## ✅ Solved Problems Log
-
-| #  | Problem                              | Pattern        | Difficulty | Approaches | Date Solved | Revision |
-|----|--------------------------------------|----------------|------------|------------|-------------|----------|
-| 1  | [Pair Sum in Sorted & Rotated Array](./01-Two-Pointers/001-Pair-Sum-Sorted-Rotated) | Two Pointers | Medium | 4 | 2026-04-29 | Rev 1 pending |
-
----
-
-## 🔁 Revision Schedule (Spaced Repetition)
-
-| Revision | After |
-|----------|-------|
-| Rev 1    | +3 days  |
-| Rev 2    | +1 week  |
-| Rev 3    | +3 weeks |
-| Rev 4    | +2 months |
-
----
-
-## 🎯 Approach Format
-
-For every problem, I document **multiple approaches**:
-
-| Tier        | Goal                                         |
-|-------------|----------------------------------------------|
-| Brute Force | Get a working solution, no optimization      |
-| Better      | Reduce time/space using extra data structures |
-| Optimal     | Best possible time + space (interview answer) |
-| Alternative | Different angle (sort + TP, recursion, etc.) |
-
-Each solution includes: **logic**, **dry run**, **complexity**, **edge cases**.
-
 ---
 
 ## 🛠️ Tech Stack
