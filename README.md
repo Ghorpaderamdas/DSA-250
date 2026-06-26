@@ -3,17 +3,9 @@
 > Solving **250+ DSA problems** organized by **25 core patterns** in Java.
 > Each problem has multiple approaches: **Brute Force → Better → Optimal**
 
----
 
-## 📊 Progress Tracker
+![alt text](dsa.jpg)
 
-**Solved:** 1 / 251 &nbsp;&nbsp;|&nbsp;&nbsp; **In Progress:** 0 &nbsp;&nbsp;|&nbsp;&nbsp; **Todo:** 250
-
-```
-[█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░] 0.4%
-```
-
----
 
 ## 🗂️ Patterns Index
 
@@ -46,6 +38,35 @@
 | 25 | Design Problems               | [25-Design-Problems](./25-Design-Problems)             | 0      | 10    |
 
 ---
+<<<<<<< HEAD
+=======
+
+
+## 🔁 Revision Schedule (Spaced Repetition)
+
+| Revision | After |
+|----------|-------|
+| Rev 1    | +3 days  |
+| Rev 2    | +1 week  |
+| Rev 3    | +3 weeks |
+| Rev 4    | +2 months |
+
+---
+
+## 🎯 Approach Format
+
+For every problem, I document **multiple approaches**:
+
+| Tier        | Goal                                         |
+|-------------|----------------------------------------------|
+| Brute Force | Get a working solution, no optimization      |
+| Better      | Reduce time/space using extra data structures |
+| Optimal     | Best possible time + space (interview answer) |
+| Alternative | Different angle (sort + TP, recursion, etc.) |
+
+Each solution includes: **logic**, **dry run**, **complexity**, **edge cases**.
+
+>>>>>>> d6a15d4 (fie)
 ---
 
 ## 🛠️ Tech Stack
