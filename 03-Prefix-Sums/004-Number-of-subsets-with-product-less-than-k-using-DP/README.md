@@ -1,3 +1,7 @@
+<img width="1024" height="1536" alt="Q4  Count Subsequences with Product Less Than K (using DP)" src="https://github.com/user-attachments/assets/4091fb4f-fc94-4acd-8e7f-693324f04abc" />
+
+
+
 # Q4. Count Subsequences with Product Less Than K (using DP)
 
 **Difficulty:** Medium &nbsp;|&nbsp; **Pattern:** Dynamic Programming (0/1 Knapsack on Product Space) &nbsp;|&nbsp; **Companies:** Amazon, Google, Microsoft
