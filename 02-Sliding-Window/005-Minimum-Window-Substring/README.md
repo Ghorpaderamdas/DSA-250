@@ -1,3 +1,7 @@
+<img width="1122" height="1402" alt="Q5  Minimum Window Substring" src="https://github.com/user-attachments/assets/0aaffd92-06b8-4f94-bc28-126abf295cb7" />
+
+
+
 # Q5. Minimum Window Substring
 
 **Difficulty:** Hard &nbsp;|&nbsp; **Pattern:** Sliding Window (Variable Size) &nbsp;|&nbsp; **Companies:** Amazon, Google, Facebook, Microsoft, Uber
