@@ -1,3 +1,7 @@
+<img width="1024" height="1536" alt="Q6  Sliding Window Maximum" src="https://github.com/user-attachments/assets/23db61a1-8cd3-46ae-8903-2e23c1217304" />
+
+
+
 # Q6. Sliding Window Maximum
 
 **Difficulty:** Hard &nbsp;|&nbsp; **Pattern:** Sliding Window + Monotonic Deque &nbsp;|&nbsp; **Companies:** Amazon, Google, Uber, Microsoft
