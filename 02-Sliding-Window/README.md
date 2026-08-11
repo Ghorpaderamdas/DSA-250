@@ -1,3 +1,7 @@
+<img width="1536" height="1024" alt="Sliding Window Pattern — Beginner&#39;s Guide" src="https://github.com/user-attachments/assets/f520d109-c5eb-4de3-bb02-f1226ab00395" />
+
+
+
 # 🪟 Sliding Window Pattern — Beginner's Guide
 
 ---
