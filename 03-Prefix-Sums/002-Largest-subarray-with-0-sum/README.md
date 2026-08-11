@@ -1,3 +1,7 @@
+<img width="1024" height="1536" alt="Q2  Largest Subarray with 0 Sum" src="https://github.com/user-attachments/assets/72d05182-4fd5-48a4-82c2-ba5f3a4205ef" />
+
+
+
 # Q2. Largest Subarray with 0 Sum
 
 **Difficulty:** Medium &nbsp;|&nbsp; **Pattern:** Prefix Sum + HashMap &nbsp;|&nbsp; **Companies:** Amazon, Flipkart, Goldman Sachs, Microsoft
