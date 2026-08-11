@@ -1,3 +1,7 @@
+<img width="1024" height="1536" alt="Q7  Count Distinct Elements in Every Window of Size K" src="https://github.com/user-attachments/assets/e6a600f7-01f4-4c5b-8837-73fd0d9e464e" />
+
+
+
 # Q7. Count Distinct Elements in Every Window of Size K
 
 **Difficulty:** Medium &nbsp;|&nbsp; **Pattern:** Sliding Window (Fixed Size) &nbsp;|&nbsp; **Companies:** Amazon, Samsung, Paytm
