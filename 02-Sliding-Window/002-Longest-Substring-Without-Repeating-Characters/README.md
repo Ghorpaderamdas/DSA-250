@@ -1,3 +1,7 @@
+<img width="1536" height="1024" alt="Q2  Longest Substring Without Repeating Characters" src="https://github.com/user-attachments/assets/9544bd96-c9e5-4f40-b7e0-482d2129a545" />
+
+
+
 # Q2. Longest Substring Without Repeating Characters
 
 **Difficulty:** Medium &nbsp;|&nbsp; **Pattern:** Sliding Window (Variable Size) &nbsp;|&nbsp; **Companies:** Amazon, Google, Facebook, Microsoft, Apple
