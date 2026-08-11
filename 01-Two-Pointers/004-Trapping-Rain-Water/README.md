@@ -1,3 +1,10 @@
+<img width="1049" height="1024" alt="Q4  Trapping Rain Water part 1" src="https://github.com/user-attachments/assets/bbbab8db-2f5d-4571-88c5-f5da033e8b9b" />
+<img width="1535" height="1024" alt="Q4  Trapping Rain Water part 2" src="https://github.com/user-attachments/assets/dcb3fd17-01c9-4c73-980c-c1a140bc82ed" />
+<img width="1536" height="1024" alt="Q4  Trapping Rain Water part 3" src="https://github.com/user-attachments/assets/beb1fea5-ec18-47e9-88c6-b3a9fc800203" />
+
+
+
+
 # Q4. Trapping Rain Water
 
 **Difficulty:** Hard &nbsp;|&nbsp; **Pattern:** Two Pointers / Prefix-Suffix / Monotonic Stack &nbsp;|&nbsp; **Companies:** Amazon, Google, Microsoft, Adobe, Goldman Sachs,Sumsung
