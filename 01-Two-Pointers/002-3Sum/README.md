@@ -1,3 +1,6 @@
+<img width="1024" height="1536" alt="Q2  3Sum" src="https://github.com/user-attachments/assets/3c19def4-dda3-4efd-9e0a-b6c020a66279" />
+
+
 # Q2. 3Sum
 
 **Difficulty:** Medium &nbsp;|&nbsp; **Pattern:** Two Pointers &nbsp;|&nbsp; **Companies:** Amazon, Facebook, Microsoft, Apple, Bloomberg
