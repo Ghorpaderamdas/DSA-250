@@ -1,3 +1,7 @@
+<img width="1024" height="1536" alt="Q3  Print All Subarrays with 0 Sum" src="https://github.com/user-attachments/assets/aec23de6-0c2e-4591-92cb-9b386b5dfd19" />
+
+
+
 # Q3. Print All Subarrays with 0 Sum
 
 **Difficulty:** Medium &nbsp;|&nbsp; **Pattern:** Prefix Sum + HashMap (Multi-Occurrence) &nbsp;|&nbsp; **Companies:** Adobe, Amazon, Samsung
