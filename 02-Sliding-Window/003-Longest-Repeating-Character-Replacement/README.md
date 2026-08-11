@@ -1,4 +1,5 @@
-![Uploading Q3. Longest Repeating Character Replacement.png…]()
+<img width="1536" height="1024" alt="Q3  Longest Repeating Character Replacement" src="https://github.com/user-attachments/assets/544b0787-acc8-496f-a00a-394e7ae4ac5a" />
+
 
 
 # Q3. Longest Repeating Character Replacement
