@@ -1,3 +1,9 @@
+<img width="1536" height="1024" alt="Q4  Best Time to Buy and Sell Stock part 1" src="https://github.com/user-attachments/assets/c5c1e232-dffb-4d68-9c4e-8138f4b29c11" />
+
+<img width="1024" height="1536" alt="Q4  Best Time to Buy and Sell Stock  part 2" src="https://github.com/user-attachments/assets/d79c1d58-01ab-4859-8f2a-5026b51cce29" />
+
+
+
 # Q4. Best Time to Buy and Sell Stock
 
 **Difficulty:** Easy &nbsp;|&nbsp; **Pattern:** Sliding Window / Two Pointers &nbsp;|&nbsp; **Companies:** Amazon, Google, Facebook, Microsoft, Goldman Sachs
