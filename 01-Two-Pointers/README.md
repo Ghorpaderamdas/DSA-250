@@ -1,3 +1,7 @@
+<img width="1536" height="1024" alt="Two Pointers Pattern — Beginner&#39;s Guide" src="https://github.com/user-attachments/assets/3caa9677-7926-4606-9643-f35bf61e9f0b" />
+
+
+
 # 👆👆 Two Pointers Pattern — Beginner's Guide
 
 ---
