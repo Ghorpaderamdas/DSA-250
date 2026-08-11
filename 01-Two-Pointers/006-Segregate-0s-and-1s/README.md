@@ -1,3 +1,6 @@
+<img width="1536" height="1024" alt="Q6  Segregate 0s and 1s in an Array" src="https://github.com/user-attachments/assets/e5cfac1f-bbdc-483d-b09e-fccc9f13699b" />
+
+
 # Q6. Segregate 0s and 1s in an Array
 
 **Difficulty:** Easy &nbsp;|&nbsp; **Pattern:** Two Pointers &nbsp;|&nbsp; **Companies:** Microsoft, Amazon, Adobe
