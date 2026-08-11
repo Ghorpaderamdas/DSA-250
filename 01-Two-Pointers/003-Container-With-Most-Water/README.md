@@ -1,3 +1,6 @@
+<img width="1536" height="1024" alt="Q3  Container With Most Water" src="https://github.com/user-attachments/assets/977ee04b-f249-4b72-a7b9-89ab7055aadf" />
+
+
 # Q3. Container With Most Water
 
 **Difficulty:** Medium &nbsp;|&nbsp; **Pattern:** Two Pointers &nbsp;|&nbsp; **Companies:** Flipkart, Dunzo, Amazon, Google, Adobe
