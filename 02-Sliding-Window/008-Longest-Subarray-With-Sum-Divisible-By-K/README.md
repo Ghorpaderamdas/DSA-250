@@ -1,3 +1,7 @@
+<img width="1024" height="1536" alt="Q8  Longest Subarray with Sum Divisible by K" src="https://github.com/user-attachments/assets/9d7abec5-3696-454c-9aec-583b0e47347f" />
+
+
+
 # Q8. Longest Subarray with Sum Divisible by K
 
 **Difficulty:** Medium &nbsp;|&nbsp; **Pattern:** Prefix Sum + HashMap &nbsp;|&nbsp; **Companies:** Amazon, Google, Flipkart
