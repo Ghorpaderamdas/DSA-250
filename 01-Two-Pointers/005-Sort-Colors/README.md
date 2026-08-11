@@ -1,3 +1,7 @@
+<img width="1536" height="1024" alt="Q5  Sort Colors" src="https://github.com/user-attachments/assets/1d73c66a-7471-4825-b24b-f9435c3b495d" />
+
+
+
 # Q5. Sort Colors
 
 **Difficulty:** Medium &nbsp;|&nbsp; **Pattern:** Two Pointers (Dutch National Flag) &nbsp;|&nbsp; **Companies:** Microsoft, Amazon, Adobe, Bloomberg, Uber
