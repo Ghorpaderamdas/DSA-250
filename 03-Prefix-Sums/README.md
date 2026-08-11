@@ -1,3 +1,8 @@
+<img width="1536" height="1024" alt="Prefix Sum Pattern — Beginner&#39;s Guide" src="https://github.com/user-attachments/assets/8ce22848-c153-4aa0-aa14-de042c77aad5" />
+
+<img width="1024" height="1536" alt="Prefix Sum Pattern — Beginner&#39;s Guide  2" src="https://github.com/user-attachments/assets/287648a6-5714-4e8a-b290-4e88764364bc" />
+
+
 # Prefix Sum Pattern — Beginner's Guide
 
 ---
