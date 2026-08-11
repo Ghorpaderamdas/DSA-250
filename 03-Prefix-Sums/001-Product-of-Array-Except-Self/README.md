@@ -1,3 +1,6 @@
+<img width="979" height="1607" alt="Q1  Product of Array Except Self" src="https://github.com/user-attachments/assets/bde4660a-93ad-42a6-9210-ba14e4d4704d" />
+
+
 # Q1. Product of Array Except Self
 
 **Difficulty:** Medium &nbsp;|&nbsp; **Pattern:** Prefix Products &nbsp;|&nbsp; **Companies:** Amazon, Apple, Facebook, Google, Microsoft
