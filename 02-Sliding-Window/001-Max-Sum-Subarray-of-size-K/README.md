@@ -1,3 +1,7 @@
+<img width="1149" height="1369" alt="Q1  Max Sum Subarray of Size K" src="https://github.com/user-attachments/assets/4a6120ea-7d3c-4b05-803a-2f906d2da864" />
+
+
+
 # Q1. Max Sum Subarray of Size K
 
 **Difficulty:** Easy &nbsp;|&nbsp; **Pattern:** Sliding Window &nbsp;|&nbsp; **Companies:** Amazon, Microsoft, Adobe
