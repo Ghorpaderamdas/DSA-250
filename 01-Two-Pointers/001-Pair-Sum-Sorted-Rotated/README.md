@@ -1,3 +1,5 @@
+<img width="1024" height="1536" alt="Q1  Pair Sum in a Sorted and Rotated Array" src="https://github.com/user-attachments/assets/787e95aa-db76-476e-9498-182fd5dffdda" />
+
 # Q1. Pair Sum in a Sorted and Rotated Array
 
 **Difficulty:** Medium &nbsp;|&nbsp; **Pattern:** Two Pointers &nbsp;|&nbsp; **Companies:** Microsoft, Google, Apple
