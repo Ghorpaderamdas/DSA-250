@@ -1,3 +1,6 @@
+![Uploading Q3. Longest Repeating Character Replacement.png…]()
+
+
 # Q3. Longest Repeating Character Replacement
 
 **Difficulty:** Medium &nbsp;|&nbsp; **Pattern:** Sliding Window (Variable Size) &nbsp;|&nbsp; **Companies:** Amazon, Google, Facebook, Bloomberg
