@@ -1,21 +1,33 @@
-# 🔗 Linked Lists in Java — Beginner's Complete Notes
+# 🔗 Linked Lists in Java — Complete Notes
 
-> **One read = full understanding.** Visual diagrams, tables, mind maps, Java code — sab kuch andar hai.
+> **One read = full understanding.** Visual diagrams, tables, mind maps, Java code, and interview-ready patterns — sab kuch andar hai.
 
 ---
 
 ## 📋 Table of Contents
 
-1. [What is a Linked List?](#1-what-is-a-linked-list) 
-2. [Array vs Array List vs Linked List](#2-array-vs-linked-list)
-3. [Big Picture — Mind Map](#3-big-picture--mind-map)
-4. [3 Types of Linked Lists](#4-3-types-of-linked-lists)
-5. [Singly Linked List — All Operations](#5-singly-linked-list--all-operations)
-6. [Circular Linked List](#6-circular-linked-list)
-7. [Doubly Linked List](#7-doubly-linked-list)
-8. [Polynomial Representation](#8-polynomial-representation)
-9. [Sparse Matrix](#9-sparse-matrix)
-10. [Quick Cheatsheet](#10-quick-cheatsheet)
+1. [What is a Linked List?](#1-what-is-a-linked-list)
+2. [Why Do We Need a Linked List?](#2-why-do-we-need-a-linked-list)
+3. [Array vs ArrayList vs Linked List](#3-array-vs-arraylist-vs-linked-list)
+4. [Big Picture — Mind Map](#4-big-picture--mind-map)
+5. [Types of Linked Lists](#5-types-of-linked-lists)
+6. [Singly Linked List — All Operations](#6-singly-linked-list--all-operations)
+7. [Circular Linked List](#7-circular-linked-list)
+8. [Doubly Linked List](#8-doubly-linked-list)
+9. [Polynomial Representation](#9-polynomial-representation)
+10. [Sparse Matrix](#10-sparse-matrix)
+11. [Quick Cheatsheet](#11-quick-cheatsheet)
+12. [Linked List Techniques (Advanced Patterns)](#12-linked-list-techniques-advanced-patterns)
+    - 12.1 [Overview](#121-overview)
+    - 12.2 [Categories & Sub-categories](#122-categories--sub-categories)
+    - 12.3 [Visual Diagram Representations](#123-visual-diagram-representations)
+    - 12.4 [Java Code Templates](#124-java-code-templates)
+    - 12.5 [Quick Decision Guide](#125-quick-decision-guide)
+    - 12.6 [When to Use These Techniques](#126-when-to-use-these-techniques)
+    - 12.7 [When NOT to Use](#127-when-not-to-use)
+    - 12.8 [Benefits](#128-benefits)
+    - 12.9 [Drawbacks / Limitations](#129-drawbacks--limitations)
+    - 12.10 [Time & Space Complexity Table](#1210-time--space-complexity-table)
 
 ---
 
@@ -75,7 +87,7 @@ class Node {
 
 ---
 
-## 🤔 Why Do We Even Need a Linked List?
+## 2. Why Do We Need a Linked List?
 
 > **Short answer:** Arrays (and ArrayLists) are great for *reading* data fast, but rigid and slow when you need to *grow, shrink, insert or delete*. Linked Lists exist to fix exactly that weak spot.
 
@@ -100,7 +112,7 @@ class Node {
 
 ---
 
-## 2. Array vs Array List vs Linked List
+## 3. Array vs ArrayList vs Linked List
 
 > 🧠 **Picture it like this:** An **Array** is a fixed row of lockers. An **ArrayList** is the same row of lockers — except when it's full, someone secretly builds a bigger row and quietly moves everything over for you. A **Linked List** is a treasure-hunt chain of boxes — you can clip a new box in anywhere without disturbing the others.
 
@@ -117,7 +129,7 @@ class Node {
 
 ---
 
-## 3. Big Picture — Mind Map
+## 4. Big Picture — Mind Map
 
 ```
                         🔗 LINKED LISTS
@@ -134,7 +146,7 @@ class Node {
 
 ---
 
-## 4. 3 Types of Linked Lists
+## 5. Types of Linked Lists
 
 ### Type 1 — Singly Linked List
 ```
@@ -168,9 +180,9 @@ null ◀─ [1] ⇄ [2] ⇄ [3] ─▶ null
 
 ---
 
-## 5. Singly Linked List — All Operations
+## 6. Singly Linked List — All Operations
 
-### 5.1 Node Structure (self-referential)
+### 6.1 Node Structure (self-referential)
 
 ```java
 class Node {
@@ -188,7 +200,7 @@ class Node {
 
 ---
 
-### 5.2 INSERTION (3 ways)
+### 6.2 INSERTION (3 ways)
 
 #### 📍 Insert at Beginning
 
@@ -255,7 +267,7 @@ prev.next = newNode;           // prev now points to new
 
 ---
 
-### 5.3 DELETION (3 ways)
+### 6.3 DELETION (3 ways)
 
 | Where | Steps | Edge Case |
 |---|---|---|
@@ -295,7 +307,7 @@ prev.next = null;                          // cut the link to the last node
 
 ---
 
-### 5.4 DISPLAY (Traversal)
+### 6.4 DISPLAY (Traversal)
 
 ```java
 void displayList(Node head) {
@@ -321,7 +333,7 @@ While p != null:
 
 ---
 
-### 5.5 SEARCH (Find Node)
+### 6.5 SEARCH (Find Node)
 
 ```java
 boolean search(Node head, int target) {
@@ -337,7 +349,7 @@ boolean search(Node head, int target) {
 
 ---
 
-## 6. Circular Linked List
+## 7. Circular Linked List
 
 > Same as Singly LL — only ONE difference: **last node points back to HEAD**
 
@@ -398,9 +410,130 @@ head = head.next;                            // move head to second node
 last.next = head;                            // last node points to new head
 ```
 
+### Insert at End (Circular)
+
+```
+BEFORE:  HEAD─▶[10]─▶[15]─▶[22]─┐
+          ▲                     │
+          └─────────────────────┘
+
+AFTER:   HEAD─▶[10]─▶[15]─▶[22]─▶[30]─┐
+          ▲                           │
+          └───────────────────────────┘
+                                  ↑ NEW (last→next = head)
+```
+
+```java
+Node newNode = new Node(x);
+
+if (head == null) {                 // empty list → points to itself
+    newNode.next = newNode;
+    head = newNode;
+    return;
+}
+
+Node last = head;
+while (last.next != head)           // find the last node
+    last = last.next;
+
+last.next = newNode;                // old last points to new node
+newNode.next = head;                // new node (new last) points back to head
+```
+
+> Note: `head` itself doesn't move here — only the old last node's `next` link changes.
+
+### Insert at Specific Position (Circular)
+
+```java
+// insert newNode AFTER a given node `temp` (temp != null, already part of the list)
+Node newNode = new Node(x);
+newNode.next = temp.next;
+temp.next = newNode;
+// if temp was the last node, newNode.next now correctly points to head
+```
+
+### Delete from End (Circular)
+
+```
+[H]─▶[10]─▶[15]─▶[22]─┐
+      ▲      ▲         │
+     prev   curr        │
+             └───────────┘  ← curr.next == head, so curr is the last node
+
+prev.next = head   ← cut here, curr is now unreferenced (GC reclaims it)
+```
+
+```java
+if (head == null) return;                     // empty list
+
+if (head.next == head) {                      // only 1 node
+    head = null;
+    return;
+}
+
+Node prev = head, curr = head.next;
+while (curr.next != head) {                   // walk till curr is the last node
+    prev = curr;
+    curr = curr.next;
+}
+prev.next = head;                              // cut the link to the last node
+```
+
+### Delete Specific Node (Circular)
+
+```java
+if (head == null) return;                       // empty list
+
+if (head.data == key && head.next == head) {    // only 1 node, matches
+    head = null;
+    return;
+}
+
+// special case: deleting the head node itself
+if (head.data == key) {
+    Node last = head;
+    while (last.next != head)                   // find the last node
+        last = last.next;
+    head = head.next;
+    last.next = head;                            // re-link last → new head
+    return;
+}
+
+// general case: search for the node to delete
+Node prev = head, curr = head.next;
+do {
+    if (curr.data == key) {
+        prev.next = curr.next;
+        return;
+    }
+    prev = curr;
+    curr = curr.next;
+} while (curr != head);
+```
+
+> ⚠️ Same edge-case checklist applies: empty list, single node, head node, specific/middle node.
+
+### Display / Traversal (Circular)
+
+```java
+void displayList(Node head) {
+    if (head == null) {
+        System.out.println("empty list");
+        return;
+    }
+    Node p = head;
+    do {
+        System.out.print(p.data + "\t");
+        p = p.next;
+    } while (p != head);          // stop when back at head, NOT at null
+}
+```
+
+> ⚠️ Using a plain `while (p != null)` loop here causes an **infinite loop** — a circular list never has a `null` link. Always use `do…while (p != head)`.
+
 ---
 
-## 7. Doubly Linked List
+## 8. Doubly Linked List
 
 > Each node has **3 parts**: `prev reference + data + next reference`
 
@@ -494,9 +627,101 @@ head = head.next;
 head.prev = null;
 ```
 
+### Insert at Specific Position (Doubly LL)
+
+```
+BEFORE:  ... ⇄ [A] ⇄ [B] ⇄ ...
+AFTER:   ... ⇄ [A] ⇄ [NEW] ⇄ [B] ⇄ ...
+```
+
+```java
+// insert newNode AFTER a given node `temp` (temp != null, already part of the list)
+Node newNode = new Node(x);
+newNode.next = temp.next;
+newNode.prev = temp;
+
+if (temp.next != null)          // temp was NOT the last node
+    temp.next.prev = newNode;
+
+temp.next = newNode;
+```
+
+### Delete from End (Doubly LL)
+
+```
+[H] ⇄ [10] ⇄ [25] ⇄ [18] ⇄ null
+                      ▲
+                    temp (temp.next == null → temp is last)
+
+temp.prev.next = null   ← cut here
+(temp is now unreferenced → GC reclaims it)
+```
+
+```java
+if (head == null) return;              // empty list
+
+if (head.next == null) {               // only 1 node
+    head = null;
+    return;
+}
+
+Node temp = head;
+while (temp.next != null)              // traverse to last node
+    temp = temp.next;
+
+temp.prev.next = null;                 // cut the link from the second-last node
+```
+
+### Delete Specific Node (Doubly LL)
+
+```java
+if (head == null || target == null) return;   // empty list / no target given
+
+if (target == head) {                          // deleting the head node
+    head = head.next;
+    if (head != null) head.prev = null;
+    return;
+}
+
+if (target.next != null)                       // target is NOT the last node
+    target.next.prev = target.prev;
+
+target.prev.next = target.next;                // relink around target
+// works even if target was the last node, since target.next is null there
+```
+
+> 💡 The biggest advantage of Doubly LL deletion: you don't need a separate `prev` walk like in Singly LL — `target.prev` is already stored on the node itself.
+
+### Display — Forward & Backward (Doubly LL)
+
+```java
+// Forward traversal (head → tail)
+void displayForward(Node head) {
+    Node p = head;
+    while (p != null) {
+        System.out.print(p.data + "\t");
+        p = p.next;
+    }
+}
+
+// Backward traversal (tail → head) — the whole point of having `prev`
+void displayBackward(Node head) {
+    if (head == null) return;
+
+    Node p = head;
+    while (p.next != null)      // walk to the last node first
+        p = p.next;
+
+    while (p != null) {         // now walk back using prev
+        System.out.print(p.data + "\t");
+        p = p.prev;
+    }
+}
+```
+
 ---
 
-## 8. Polynomial Representation
+## 9. Polynomial Representation
 
 > Store a polynomial like `4x³ + 6x² + 10x + 6` as a linked list.
 
@@ -556,7 +781,7 @@ Result: [5|2] ──▶ [9|1] ──▶ [7|0]     = 5x² + 9x + 7
 
 ---
 
-## 9. Sparse Matrix
+## 10. Sparse Matrix
 
 > A matrix where **most elements are zero** — wasteful to store all of them.
 
@@ -612,7 +837,7 @@ Header Node:                    Element Node:
 
 ---
 
-## 10. Quick Cheatsheet
+## 11. Quick Cheatsheet
 
 > 📌 Read this the night before exam!
 
@@ -666,4 +891,326 @@ SINGLY LL OPERATIONS
 
 ---
 
-> 📘 **Unit 2 — Data Structures** | Singly LL · Circular LL · Doubly LL · Polynomial · Sparse Matrix
+## 12. Linked List Techniques (Advanced Patterns)
+
+> Beyond basic insert/delete/search, certain reusable *patterns* come up again and again in DSA and coding-interview problems built on linked lists. This section covers those techniques as a standalone toolkit.
+
+### 12.1 Overview
+
+| # | Technique | Purpose |
+|---|---|---|
+| 1 | **Dummy Node Technique** | Simplify edge cases (empty list, head deletion) |
+| 2 | **Fast-Slow Pointers (Floyd's)** | Find middle, detect cycle, cycle start |
+| 3 | **Reversal Technique** | Reverse whole list / sub-list / in groups of K |
+| 4 | **Two-Pointer / Runner Technique** | Nth node from end, remove Nth node |
+| 5 | **Merge Technique** | Merge two/k sorted lists |
+| 6 | **Recursion Technique** | Reverse, merge, palindrome check recursively |
+| 7 | **In-place Manipulation** | Reorder list, swap nodes in pairs, rotate list |
+| 8 | **Cycle Detection & Removal** | Detect + remove loop in list |
+| 9 | **Intersection Technique** | Find intersection point of two lists |
+
+---
+
+### 12.2 Categories & Sub-categories
+
+| Category | Sub-category | Examples |
+|---|---|---|
+| **Traversal-based** | Single pass, Two pass | Find length, find middle |
+| **Multi-pointer** | Fast-Slow, Two-pointer with gap | Cycle detect, Nth from end |
+| **Structural modification** | Full reversal, Partial reversal, Group reversal | Reverse List, Reverse Between, Reverse K-Group |
+| **Combining lists** | Merge (2 lists), Merge (K lists) | Merge Two Sorted Lists, Merge K Sorted Lists |
+| **Node-value techniques** | Dummy head, Sentinel node | Remove Elements, Delete Duplicates |
+| **Math/Logic on LL** | Add numbers, Palindrome check | Add Two Numbers, Palindrome Linked List |
+
+---
+
+### 12.3 Visual Diagram Representations
+
+#### A) Dummy Node Technique
+```
+Real list:      [1] -> [2] -> [3] -> null
+With Dummy:  [D] -> [1] -> [2] -> [3] -> null
+              ^
+           dummy.next = head (fake starting point)
+
+Why? So head deletion/insertion doesn't need special-case code:
+     dummy.next always exists, even if real head changes.
+Return dummy.next at the end (the real new head).
+```
+
+#### B) Fast-Slow Pointers (find middle / detect cycle)
+```
+1 -> 2 -> 3 -> 4 -> 5 -> null
+slow          fast
+
+step1: slow=2, fast=3
+step2: slow=3, fast=5
+step3: fast.next==null -> stop. slow = middle (3)
+```
+
+#### C) Reversal Technique (whole list)
+```
+BEFORE:  null <- ?   [1] -> [2] -> [3] -> null
+                       ↑
+                     head
+
+Iterative flip using 3 pointers: prev, curr, next
+prev=null curr=1
+  next=2; 1.next=null(prev); prev=1; curr=2
+  next=3; 2.next=1(prev);    prev=2; curr=3
+  next=null; 3.next=2(prev); prev=3; curr=null
+
+AFTER:  null <- [1] <- [2] <- [3]
+                                ^
+                             new head = prev
+```
+
+#### D) Reverse in Groups of K (K=2)
+```
+BEFORE: [1] -> [2] -> [3] -> [4] -> [5] -> null
+AFTER:  [2] -> [1] -> [4] -> [3] -> [5] -> null
+        (reverse each block of 2, last odd group can stay as-is or reverse per rule)
+```
+
+#### E) Two-Pointer / Runner (Nth Node From End, n=2)
+```
+[1] -> [2] -> [3] -> [4] -> [5] -> null
+fast starts n steps ahead:
+fast: 1 -> 2 -> 3 (n=2 steps ahead)
+Then move both together till fast hits null:
+slow lands just before the target -> delete slow.next
+```
+
+#### F) Merge Two Sorted Lists
+```
+L1: [1] -> [3] -> [5] -> null
+L2: [2] -> [4] -> [6] -> null
+
+Merge using dummy node + pointer comparison:
+Result: [1]->[2]->[3]->[4]->[5]->[6]->null
+```
+
+#### G) Cycle Detection (Floyd's) + Finding Cycle Start
+```
+1 -> 2 -> 3 -> 4 -> 5
+          ^         |
+          |_________|
+
+slow & fast meet inside cycle -> cycle exists
+Reset one pointer to head, move both 1 step at a time
+-> they meet exactly at cycle START node
+```
+
+#### H) Palindrome Check (find middle + reverse half + compare)
+```
+[1] -> [2] -> [3] -> [2] -> [1] -> null
+Step1: find middle -> split
+Step2: reverse second half -> [1] -> [2] -> [3]
+Step3: compare first half vs reversed second half
+```
+
+---
+
+### 12.4 Java Code Templates
+
+**Dummy Node (generic pattern)**
+```java
+ListNode dummy = new ListNode(-1);
+dummy.next = head;
+ListNode curr = dummy;
+// ... do operations using curr, curr.next ...
+return dummy.next; // real head (handles head changes safely)
+```
+
+**Reverse Linked List (iterative)**
+```java
+public ListNode reverseList(ListNode head) {
+    ListNode prev = null, curr = head;
+    while (curr != null) {
+        ListNode next = curr.next; // save next
+        curr.next = prev;          // reverse link
+        prev = curr;                // move prev forward
+        curr = next;                 // move curr forward
+    }
+    return prev; // new head
+}
+```
+
+**Reverse Linked List (recursive)**
+```java
+public ListNode reverseList(ListNode head) {
+    if (head == null || head.next == null) return head; // base case
+    ListNode newHead = reverseList(head.next);
+    head.next.next = head; // reverse the link
+    head.next = null;
+    return newHead;
+}
+```
+
+**Merge Two Sorted Lists (using Dummy)**
+```java
+public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+    ListNode dummy = new ListNode(-1);
+    ListNode curr = dummy;
+    while (l1 != null && l2 != null) {
+        if (l1.val <= l2.val) { curr.next = l1; l1 = l1.next; }
+        else { curr.next = l2; l2 = l2.next; }
+        curr = curr.next;
+    }
+    curr.next = (l1 != null) ? l1 : l2;
+    return dummy.next;
+}
+```
+
+**Remove Nth Node From End (Two-Pointer/Runner)**
+```java
+public ListNode removeNthFromEnd(ListNode head, int n) {
+    ListNode dummy = new ListNode(-1);
+    dummy.next = head;
+    ListNode fast = dummy, slow = dummy;
+    for (int i = 0; i < n; i++) fast = fast.next; // move fast n steps
+    while (fast.next != null) {
+        fast = fast.next;
+        slow = slow.next;
+    }
+    slow.next = slow.next.next; // remove target node
+    return dummy.next;
+}
+```
+
+**Detect Cycle + Find Cycle Start**
+```java
+public ListNode detectCycle(ListNode head) {
+    ListNode slow = head, fast = head;
+    while (fast != null && fast.next != null) {
+        slow = slow.next;
+        fast = fast.next.next;
+        if (slow == fast) {           // cycle found
+            slow = head;
+            while (slow != fast) {    // find start
+                slow = slow.next;
+                fast = fast.next;
+            }
+            return slow;
+        }
+    }
+    return null; // no cycle
+}
+```
+
+**Reverse in K-Group**
+```java
+public ListNode reverseKGroup(ListNode head, int k) {
+    ListNode node = head;
+    int count = 0;
+    while (node != null && count < k) { node = node.next; count++; }
+    if (count < k) return head; // fewer than k nodes left, leave as-is
+
+    ListNode prev = reverseKGroup(node, k); // recurse for next group
+    ListNode curr = head;
+    while (count-- > 0) {
+        ListNode next = curr.next;
+        curr.next = prev;
+        prev = curr;
+        curr = next;
+    }
+    return prev;
+}
+```
+
+**Palindrome Linked List**
+```java
+public boolean isPalindrome(ListNode head) {
+    ListNode slow = head, fast = head;
+    while (fast != null && fast.next != null) { // find middle
+        slow = slow.next;
+        fast = fast.next.next;
+    }
+    ListNode secondHalfReversed = reverseList(slow); // reverse second half
+    ListNode p1 = head, p2 = secondHalfReversed;
+    while (p2 != null) {                              // compare
+        if (p1.val != p2.val) return false;
+        p1 = p1.next;
+        p2 = p2.next;
+    }
+    return true;
+}
+```
+
+---
+
+### 12.5 Quick Decision Guide
+
+```
+Need to reverse (whole/part/groups)?      -> Reversal Technique
+Need to find middle / detect cycle?       -> Fast-Slow Pointers
+Need Nth node from end?                   -> Two-Pointer/Runner Technique
+Need to merge sorted lists?               -> Merge Technique (+ Dummy Node)
+Head might change / edge cases messy?     -> Dummy Node Technique
+Need palindrome check?                    -> Fast-Slow (middle) + Reversal + Compare
+Two lists intersecting somewhere?         -> Intersection Technique (align lengths first)
+```
+
+---
+
+### 12.6 When to Use These Techniques
+
+- Need to solve LL problems with **O(1) extra space** instead of using arrays/hashmaps
+- Problem involves: reversing, detecting cycles, finding middle, merging, removing Nth node
+- Interview/DSA problems explicitly involving **singly/doubly linked lists**
+- Need to modify list structure **in-place** without creating new nodes/lists
+- Problem has keywords: "reverse", "cycle", "middle", "merge", "Nth from end", "palindrome linked list", "intersection point"
+
+---
+
+### 12.7 When NOT to Use
+
+- When **random access** is needed frequently → use Array/ArrayList instead (LL is O(n) to access by index)
+- When the data structure isn't actually a linked list (arrays, trees, graphs need different techniques)
+- When simplicity matters more than space — sometimes using a **HashSet** (O(n) space) is far simpler to code correctly than pointer manipulation, especially under time pressure
+- For very simple operations like **display/traverse/search**, no special "technique" is needed — plain iteration suffices
+- If a doubly linked list is available and you need backward info → use `prev` directly instead of forcing single-pointer techniques
+
+---
+
+### 12.8 Benefits
+
+- Most techniques achieve **O(1) extra space** — no auxiliary array/hashmap needed
+- **Single-pass (O(n))** solutions for problems that look like they'd need O(n²) or O(n) extra space
+- Elegant, memory-efficient — great for large lists / memory-constrained systems
+- Dummy node technique **eliminates messy edge-case code** (empty list, head deletion)
+- Reusable patterns — same fast-slow / reversal ideas apply across many different problems
+
+---
+
+### 12.9 Drawbacks / Limitations
+
+- **Pointer manipulation is error-prone** — easy to lose reference to a node (memory leak/lost segment) or create accidental cycles
+- Logic is **hard to visualize/debug** without drawing diagrams — off-by-one and null-pointer errors are common
+- Some techniques (like reverse-in-groups, cycle-start-detection) require **careful mathematical reasoning**, not just intuition
+- Recursive techniques add **O(n) stack space**, defeating the "O(1) space" advantage unless done iteratively
+- Not beginner-friendly — takes practice to master multi-pointer coordination
+
+---
+
+### 12.10 Time & Space Complexity Table
+
+| Technique | Problem Example | Time | Space |
+|---|---|---|---|
+| Dummy Node | Remove Elements, Merge Lists | O(n) | O(1) |
+| Fast-Slow (middle) | Find Middle Node | O(n) | O(1) |
+| Fast-Slow (cycle detect) | Linked List Cycle | O(n) | O(1) |
+| Fast-Slow (cycle start) | Linked List Cycle II | O(n) | O(1) |
+| Reversal (iterative) | Reverse Linked List | O(n) | O(1) |
+| Reversal (recursive) | Reverse Linked List | O(n) | O(n) — call stack |
+| Reverse in K-Group | Reverse Nodes in k-Group | O(n) | O(1) iterative / O(n/k) recursive |
+| Two-Pointer (Nth from end) | Remove Nth Node From End | O(n) | O(1) |
+| Merge Two Sorted Lists | Merge Two Sorted Lists | O(n+m) | O(1) (in-place) |
+| Merge K Sorted Lists | Merge K Sorted Lists | O(N log k) | O(k) — heap |
+| Palindrome Check | Palindrome Linked List | O(n) | O(1) |
+| Intersection of Two Lists | Intersection of Two LL | O(n+m) | O(1) |
+| Add Two Numbers | Add Two Numbers (LL) | O(max(n,m)) | O(max(n,m)) for result list |
+
+---
+
+> 📘 **Unit 2 — Data Structures** | Singly LL · Circular LL · Doubly LL · Polynomial · Sparse Matrix · Linked List Techniques
