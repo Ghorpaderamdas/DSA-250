@@ -1,3 +1,7 @@
+[Linked Lists in Java - Handwritten Notebook Notes.pdf](https://github.com/user-attachments/files/31636556/Linked.Lists.in.Java.-.Handwritten.Notebook.Notes.pdf)
+
+
+
 # 🔗 Linked Lists in Java — Complete Notes
 
 > **One read = full understanding.** Visual diagrams, tables, mind maps, Java code, and interview-ready patterns — sab kuch andar hai.
